@@ -9,8 +9,10 @@
 import Foundation
 
 enum SearchTerm {
-    case byTitle(String)
-    case byImdbID(String)
+    case bySearch(String)
+    case byImdbIDFull(String)
+    case byImdbIDShort(String)
+
 }
 
 struct omdbURLCreator {
@@ -19,10 +21,10 @@ struct omdbURLCreator {
 
     private static func searchQuery(by term: SearchTerm) -> URLQueryItem {
         switch term {
-        case .byTitle(let title):
+        case .bySearch(let title):
             //e.g. https://www.omdbapi.com/?apikey=3b0c7c0c&scheme=https&path=&host=svr2.omdbapi.com&s=Jaws&page=1
             return URLQueryItem(name: "s", value: title)
-        case .byImdbID(let imdbID):
+        case .byImdbIDFull(let imdbID) , .byImdbIDShort(let imdbID):
             //e.g. https://www.omdbapi.com/?apikey=3b0c7c0c&scheme=https&path=&host=svr2.omdbapi.com&i=tt0073195
             return URLQueryItem(name: "i", value: imdbID)
         }
@@ -30,9 +32,12 @@ struct omdbURLCreator {
     
     private static func plotLength(by term: SearchTerm) -> URLQueryItem? {
         switch term {
-        case .byImdbID:
+        case .byImdbIDFull:
             //e.g. https://www.omdbapi.com/?apikey=3b0c7c0c&scheme=https&path=&host=svr2.omdbapi.com&i=tt0073195&page=1&plot=full
             return URLQueryItem(name: "plot", value: "full")
+        case .byImdbIDShort:
+            //e.g. https://www.omdbapi.com/?apikey=3b0c7c0c&scheme=https&path=&host=svr2.omdbapi.com&i=tt0073195&page=1&plot=full
+            return URLQueryItem(name: "plot", value: "short")
         default:
             return nil
         }
@@ -40,7 +45,7 @@ struct omdbURLCreator {
     
     private static func pageNumber(by term: SearchTerm, page: Int = 1) -> URLQueryItem? {
         switch term {
-        case .byTitle:
+        case .bySearch:
             //e.g. https://www.omdbapi.com/?apikey=3b0c7c0c&scheme=https&path=&host=svr2.omdbapi.com&s=Jaws&page=1
             return URLQueryItem(name: "page", value: "\(page)")
         default:
@@ -54,10 +59,7 @@ struct omdbURLCreator {
         
         //common parameters
         //e.g. https://www.omdbapi.com/?apikey=3b0c7c0c&scheme=https&path=&host=svr2.omdbapi.com&i=tt0073195&page=1&plot=full
-        let baseParams = ["scheme" : "https",
-                          "host" : "svr2.omdbapi.com",
-                          "path" : "",
-                          "apikey" : omdbURLCreator.apiKeyOMDB]
+        let baseParams = ["apikey" : omdbURLCreator.apiKeyOMDB]
         //append your query items to queryItems itereating common base params
         for (key, value) in  baseParams {
             let item = URLQueryItem(name: key, value: value)

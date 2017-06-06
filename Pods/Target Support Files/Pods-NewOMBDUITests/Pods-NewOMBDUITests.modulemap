@@ -1,0 +1,6 @@
+framework module Pods_NewOMBDUITests {
+  umbrella header "Pods-NewOMBDUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

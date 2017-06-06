@@ -9,8 +9,9 @@
 import Foundation
 
 typealias APIMovieResponse = (Bool, [Search]?, NSError?) -> Void
+typealias response = (Bool, String) -> Void
 
-class  NetworkRequestManager {
+class NetworkRequestManager {
     
     private static let session: URLSession = {
         let config = URLSessionConfiguration.default

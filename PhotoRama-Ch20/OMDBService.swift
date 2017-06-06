@@ -10,14 +10,17 @@ import Foundation
 
 class OMDBService {
     
-    static func searchMovieByTitle(tite: String) {
-        let url = omdbURLCreator.createOMDBURLWithComponents(term: .byTitle(tite), page: 1)
-        print(url!)
+    static func searchMovieByTitle(title: String) {
+        let url = omdbURLCreator.createOMDBURLWithComponents(term: .bySearch(title), page: 1)
+
         NetworkRequestManager.omdbRequest(with: url!) { (success, searchResultsArray, error) in
-            let searchResults = ["searchResults": searchResultsArray]
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "searchResults"),
-                                            object: self,
-                                            userInfo: searchResults)
+            if success {
+                let searchResults = ["searchResults": searchResultsArray]
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "searchResults"),
+                                                object: self,
+                                                userInfo: searchResults)
+            }
         }
+        
     }
 }
