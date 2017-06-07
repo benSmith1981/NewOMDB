@@ -23,6 +23,7 @@ class ViewController: UITableViewController, UISearchResultsUpdating, UISearchBa
 
     var searchesArray = [Search]() {
         didSet{
+            //comment I should not work on the master branch
             //everytime savedarticles is added to or deleted from table is refreshed
             self.tableView.reloadData()
             //added coredatae
