@@ -9,11 +9,17 @@
 import UIKit
 import Foundation
 
-class ViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
+protocol favMovieDelegate: class {
+    func favMovie(movieSearchData: Search)
+}
+
+class ViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate, favMovieDelegate {
 
     var currentSearchText: String = "" //current page we are scrolling on
     var currentPage: Int = 1 //current page we are scrolling on
     let searchController = UISearchController(searchResultsController: nil)
+    var currentMovie: Search?
+    var currentDetailMovie: MovieDetail?
 
     var searchesArray = [Search]() {
         didSet{
@@ -30,20 +36,29 @@ class ViewController: UITableViewController, UISearchResultsUpdating, UISearchBa
         tableView.tableHeaderView = searchController.searchBar
         searchController.searchBar.delegate = self
 
+        let nib = UINib(nibName: "MovieCell", bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: "MovieCell")
         
-        OMDBService.searchMovieByTitle(title: "Jaws")
         NotificationCenter.default.addObserver(self,
                                                 selector: #selector(ViewController.notifyObservers),
                                                 name:  NSNotification.Name(rawValue: "searchResults" ),
                                                 object: nil)
         
-    
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(ViewController.movieDetailObserver),
+                                               name:  NSNotification.Name(rawValue: "movieDetailNotification" ),
+                                               object: nil)
         // Do any additional setup after loading the view, typically from a nib.
     }
     
     func notifyObservers(notification: NSNotification) {
         var searchesDict: Dictionary<String,[Search]> = notification.userInfo as! Dictionary<String,[Search]>
         searchesArray = searchesDict["searchResults"]!
+    }
+    
+    func movieDetailObserver(notification: NSNotification) {
+        var searchesDict = notification.userInfo as! Dictionary<String,MovieDetail>
+        currentDetailMovie = searchesDict["moviedetail"] as! MovieDetail
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -57,10 +72,26 @@ class ViewController: UITableViewController, UISearchResultsUpdating, UISearchBa
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "identifier", for: indexPath) as! UITableViewCell
+        let cell: MovieCell = self.tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
         let movie = searchesArray[indexPath.row]
-        cell.textLabel?.text = movie.title
+        cell.delegate = self
+        cell.setDataForView(movieData: movie)
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        currentMovie = searchesArray[indexPath.row]
+        if let id = currentMovie?.imdbID {
+            OMDBService.getMovieDetailsByID(ID: id)
+            self.performSegue(withIdentifier: "detailView", sender: self)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detailView" {
+            let dest = segue.destination as! DetailViewController
+            dest.movieDetailObject = currentDetailMovie
+        }
     }
 
     
@@ -88,13 +119,17 @@ class ViewController: UITableViewController, UISearchResultsUpdating, UISearchBa
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        if searchController.isActive && (searchBar.text?.characters.count)! >= 2 && self.currentSearchText != searchBar.text {
-//            let text = searchBar.text ?? ""
-//            if text == searchBar.text {
-//                self.currentSearchText = text
-//                OMDBService.searchMovieByTitle(title: text)
-//            }
-//        }
+        if searchController.isActive && (searchBar.text?.characters.count)! >= 2 && self.currentSearchText != searchBar.text {
+            let text = searchBar.text ?? ""
+            if text == searchBar.text {
+                self.currentSearchText = text
+                OMDBService.searchMovieByTitle(title: text)
+            }
+        }
+    }
+    
+    func favMovie(movieSearchData: Search) {
+        //write to core data
     }
 }
 

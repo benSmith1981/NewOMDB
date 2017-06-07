@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="135" id="9CD-sZ-T9W" customClass="MovieCell" customModule="NewOMBD" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="541" height="135"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9CD-sZ-T9W" id="geD-Gx-uq9">
+                <rect key="frame" x="0.0" y="0.0" width="541" height="135"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CfM-lr-Szl">
+                        <rect key="frame" x="8" y="7" width="123" height="120"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="120" id="ALF-X5-TEQ"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RMW-E1-myh">
+                        <rect key="frame" x="149" y="51" width="243" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="243" id="Pjo-5u-KHR"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jkq-TA-YiT">
+                        <rect key="frame" x="464" y="51" width="50" height="50.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50.5" id="0KQ-1J-NZq"/>
+                            <constraint firstAttribute="width" constant="50" id="8pw-hG-uLq"/>
+                        </constraints>
+                        <state key="normal" title="Save">
+                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <connections>
+                            <action selector="favouriteMovie:" destination="9CD-sZ-T9W" eventType="touchUpInside" id="5vf-WW-oDa"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="CfM-lr-Szl" firstAttribute="centerY" secondItem="RMW-E1-myh" secondAttribute="centerY" id="9eA-sb-wQl"/>
+                    <constraint firstItem="RMW-E1-myh" firstAttribute="top" secondItem="geD-Gx-uq9" secondAttribute="topMargin" constant="43" id="ALv-vF-MdB"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Jkq-TA-YiT" secondAttribute="trailing" constant="19" id="BKQ-ER-r4p"/>
+                    <constraint firstItem="RMW-E1-myh" firstAttribute="centerY" secondItem="geD-Gx-uq9" secondAttribute="centerY" id="DUv-Zs-sJ8"/>
+                    <constraint firstItem="Jkq-TA-YiT" firstAttribute="top" secondItem="geD-Gx-uq9" secondAttribute="topMargin" constant="43" id="HUy-vc-MyG"/>
+                    <constraint firstItem="RMW-E1-myh" firstAttribute="centerX" secondItem="geD-Gx-uq9" secondAttribute="centerX" id="SqN-Km-UmV"/>
+                    <constraint firstItem="CfM-lr-Szl" firstAttribute="leading" secondItem="geD-Gx-uq9" secondAttribute="leadingMargin" id="WBv-uH-mhw"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Jkq-TA-YiT" secondAttribute="bottom" constant="25" id="c6S-Iu-pnb"/>
+                    <constraint firstItem="RMW-E1-myh" firstAttribute="leading" secondItem="CfM-lr-Szl" secondAttribute="trailing" constant="18" id="ddA-Zh-a63"/>
+                    <constraint firstItem="CfM-lr-Szl" firstAttribute="leading" secondItem="geD-Gx-uq9" secondAttribute="leading" constant="8" id="fat-B3-gnJ"/>
+                    <constraint firstItem="CfM-lr-Szl" firstAttribute="top" secondItem="geD-Gx-uq9" secondAttribute="topMargin" constant="-1" id="ig0-zC-Aor"/>
+                    <constraint firstItem="CfM-lr-Szl" firstAttribute="top" secondItem="geD-Gx-uq9" secondAttribute="top" constant="7" id="qIY-eC-s2v"/>
+                    <constraint firstItem="RMW-E1-myh" firstAttribute="centerY" secondItem="geD-Gx-uq9" secondAttribute="centerY" id="qJL-59-lOP"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="favouriteButton" destination="Jkq-TA-YiT" id="JIX-9B-9HS"/>
+                <outlet property="movieImageView" destination="CfM-lr-Szl" id="OCh-OI-un1"/>
+                <outlet property="movieTitle" destination="RMW-E1-myh" id="1Hz-dv-Dh6"/>
+            </connections>
+            <point key="canvasLocation" x="-44.5" y="-274.5"/>
+        </tableViewCell>
+    </objects>
+</document>
