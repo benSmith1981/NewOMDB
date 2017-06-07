@@ -30,6 +30,12 @@ class OMDBService {
         NetworkRequestManager.omdbRequest(with: url!) { (success, movieDetail, searchResultsArray, error) in
             if success {
                 let movieDetailsResult = ["moviedetail": movieDetail]
+                
+                do {
+                    try CoredataManager.sharedInstance.persistentContainer.viewContext.save()
+                } catch let error {
+                    print(error.localizedDescription)
+                }
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "movieDetailNotification"),
                                                 object: self,
                                                 userInfo: movieDetailsResult)

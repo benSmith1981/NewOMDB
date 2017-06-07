@@ -37,7 +37,8 @@ class NetworkRequestManager {
             //have a plot then we know detail
             if let moviePlot = jsonObject?["Plot"] as? String,
                 let movieDetailDict = jsonObject as? NSDictionary{
-                let movie = MovieDetail.init(dictionary: movieDetailDict)
+                let context = CoredataManager.sharedInstance.persistentContainer.viewContext
+                let movie = MovieDetail.init(dictionary: movieDetailDict, context: context)
                 onCompletion(true, movie, nil, nil)
             }
         } catch let error  {

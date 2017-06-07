@@ -11,40 +11,32 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 import Foundation
 import CoreData
 
-/* For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
+public class MovieDetail {
+    //The managed object for core data
+    var movieManagedObject: Movie!
 
-extension MovieDetail {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<MovieDetail> {
-        return NSFetchRequest<MovieDetail>(entityName: "MovieDetail")
-    }
-    
-    @NSManaged public var omdbID: String?
-    @NSManaged public var plot: String?
-    @NSManaged public var poster: String?
-    @NSManaged public var title: String?
-    
-//	public var title : String?
-//	public var year : String?
-//	public var rated : String?
-//	public var released : String?
-//	public var runtime : String?
-//	public var genre : String?
-//	public var director : String?
-//	public var writer : String?
-//	public var actors : String?
-//	public var plot : String?
-//	public var language : String?
-//	public var country : String?
-//	public var awards : String?
-//	public var poster : String?
-//	public var ratings : Array<Ratings>?
-//	public var metascore : String?
-//    public var imdbRating : Double?
-//	public var imdbVotes : String?
-//	public var imdbID : String?
-//	public var type : String?
-//	public var totalSeasons : Int?
-//	public var response : Bool?
+	public var title : String?
+	public var year : String?
+	public var rated : String?
+	public var released : String?
+	public var runtime : String?
+	public var genre : String?
+	public var director : String?
+	public var writer : String?
+	public var actors : String?
+	public var plot : String?
+	public var language : String?
+	public var country : String?
+	public var awards : String?
+	public var poster : String?
+	public var ratings : Array<Ratings>?
+	public var metascore : String?
+    public var imdbRating : Double?
+	public var imdbVotes : String?
+	public var imdbID : String?
+	public var type : String?
+	public var totalSeasons : Int?
+	public var response : Bool?
 
 /**
     Returns an array of models based on given dictionary.
@@ -61,7 +53,7 @@ extension MovieDetail {
         var models:[MovieDetail] = []
         for item in array
         {
-            models.append(MovieDetail(dictionary: item as! NSDictionary))
+            models.append(MovieDetail(dictionary: item as! NSDictionary, context: CoredataManager.sharedInstance.persistentContainer.viewContext))
         }
         return models
     }
@@ -76,7 +68,7 @@ extension MovieDetail {
 
     - returns: Json4Swift_Base Instance.
 */
-	convenience init(dictionary: NSDictionary) {
+    convenience init(dictionary: NSDictionary, context: NSManagedObjectContext) {
         self.init()
 		title = dictionary["Title"] as? String
 //		year = dictionary["Year"] as? String
@@ -96,10 +88,19 @@ extension MovieDetail {
 //		metascore = dictionary["Metascore"] as? String
 //		imdbRating = dictionary["imdbRating"] as? Double
 //		imdbVotes = dictionary["imdbVotes"] as? String
-		omdbID = dictionary["imdbID"] as? String
+		imdbID = dictionary["imdbID"] as? String
 //		type = dictionary["Type"] as? String
 //		totalSeasons = dictionary["totalSeasons"] as? Int
 //		response = dictionary["Response"] as? Bool
+        
+        context.performAndWait {
+            self.movieManagedObject = Movie(context: context)
+            self.movieManagedObject.imdbID = self.imdbID
+            self.movieManagedObject.plot = self.plot
+            self.movieManagedObject.poster = self.poster
+            self.movieManagedObject.title = self.title
+
+        }
 	}
 
 		
@@ -129,7 +130,7 @@ extension MovieDetail {
 //		dictionary.setValue(self.metascore, forKey: "Metascore")
 //		dictionary.setValue(self.imdbRating, forKey: "imdbRating")
 //		dictionary.setValue(self.imdbVotes, forKey: "imdbVotes")
-		dictionary.setValue(self.omdbID, forKey: "imdbID")
+		dictionary.setValue(self.imdbID, forKey: "imdbID")
 //		dictionary.setValue(self.type, forKey: "Type")
 //		dictionary.setValue(self.totalSeasons, forKey: "totalSeasons")
 //		dictionary.setValue(self.response, forKey: "Response")
