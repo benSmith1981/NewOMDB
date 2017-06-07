@@ -25,6 +25,7 @@ class ViewController: UITableViewController, UISearchResultsUpdating, UISearchBa
         didSet{
             //everytime savedarticles is added to or deleted from table is refreshed
             self.tableView.reloadData()
+            //added coredatae
         }
     }
     override func viewDidLoad() {
