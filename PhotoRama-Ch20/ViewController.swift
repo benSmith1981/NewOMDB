@@ -65,11 +65,14 @@ class ViewController: UITableViewController, favMovieDelegate {
     func notifyErrorResponse(notification: NSNotification) {
         var searchesDict: Dictionary<String,NSError> = notification.userInfo as! Dictionary<String,NSError>
         let errorObject = searchesDict["error"]!
-        if let errorResponse = errorObject.userInfo["errorMessage"] as? ErrorResponse {
-            let alert = UIAlertController(title: "Error", message: errorResponse.error, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil ))
-            self.present(alert, animated: true, completion: nil)
-        }
+
+        let errorTitle = errorObject.domain
+        let errorMessage = errorObject.localizedDescription
+        
+        let alert = UIAlertController(title: errorTitle, message: errorMessage , preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil ))
+        self.present(alert, animated: true, completion: nil)
+
     }
     
     func movieDetailObserver(notification: NSNotification) {

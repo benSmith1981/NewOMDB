@@ -20,6 +20,7 @@
 		9043650F1EE86D62009C4D79 /* Movie+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9043650D1EE86D62009C4D79 /* Movie+CoreDataProperties.swift */; };
 		904365121EE87176009C4D79 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904365111EE87176009C4D79 /* CoreDataService.swift */; };
 		904365141EE87363009C4D79 /* FavTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904365131EE87363009C4D79 /* FavTableViewController.swift */; };
+		90B44E431EE9B7500036DC37 /* NSErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B44E421EE9B7500036DC37 /* NSErrorExtension.swift */; };
 		90B7D62A1EE7F1960089406E /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B7D6281EE7F1960089406E /* MovieCell.swift */; };
 		90B7D62B1EE7F1960089406E /* MovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90B7D6291EE7F1960089406E /* MovieCell.xib */; };
 		BED8F1111EDE30E900ABF40B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BED8F0FD1EDE30E900ABF40B /* Info.plist */; };
@@ -73,6 +74,7 @@
 		9043650D1EE86D62009C4D79 /* Movie+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Movie+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		904365111EE87176009C4D79 /* CoreDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		904365131EE87363009C4D79 /* FavTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavTableViewController.swift; sourceTree = "<group>"; };
+		90B44E421EE9B7500036DC37 /* NSErrorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSErrorExtension.swift; sourceTree = "<group>"; };
 		90B7D6281EE7F1960089406E /* MovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		90B7D6291EE7F1960089406E /* MovieCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieCell.xib; sourceTree = "<group>"; };
 		B27B193D37A911619128150A /* Pods-NewOMBD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewOMBD.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NewOMBD/Pods-NewOMBD.debug.xcconfig"; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 		BED8F13A1EDE320200ABF40B /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				90B44E421EE9B7500036DC37 /* NSErrorExtension.swift */,
 				903F3FF01EE9880E00B67B6F /* ErrorResponse.swift */,
 				900C0CB11EE80B38000E698D /* MovieDetail.swift */,
 				900C0CB21EE80B38000E698D /* Ratings.swift */,
@@ -540,6 +543,7 @@
 				BED8F1341EDE31EE00ABF40B /* OMDBService.swift in Sources */,
 				900C0CB31EE80B38000E698D /* MovieDetail.swift in Sources */,
 				903F3FF11EE9880E00B67B6F /* ErrorResponse.swift in Sources */,
+				90B44E431EE9B7500036DC37 /* NSErrorExtension.swift in Sources */,
 				BED8F1391EDE31EE00ABF40B /* ViewController.swift in Sources */,
 				BED8F1371EDE31EE00ABF40B /* Search.swift in Sources */,
 			);

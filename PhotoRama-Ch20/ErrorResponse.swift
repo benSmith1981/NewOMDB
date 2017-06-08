@@ -16,6 +16,7 @@ public class ErrorResponse {
 	public var response : Bool?
 	public var error : String?
 
+    public var standardNSError: NSError?
 /**
     Returns an array of models based on given dictionary.
     
@@ -52,9 +53,26 @@ public class ErrorResponse {
             response = (responsString == "False") ? false : true
         }
 		error = dictionary["Error"] as? String
+        standardNSError = self.createNSError()
 	}
+    
+    convenience public init?(nsError: NSError) {
+        self.init(dictionary: ["Error" : "Other", "Response" : false])
+        standardNSError = createNSError(error: nsError)
+    }
 
-		
+    public func createNSError(error: NSError) -> NSError{
+        if error.isNetworkConnectionError() {
+            let userInfo = [
+                NSLocalizedDescriptionKey: "Network Issue",
+                NSLocalizedFailureReasonErrorKey: "Network Issue",
+                NSLocalizedRecoverySuggestionErrorKey: "Connect to network"
+            ]
+            return NSError.init(domain: "Network Connection", code: -57, userInfo: userInfo)
+        } else {
+            return error
+        }
+    }
 /**
     Returns the dictionary representation for the current instance.
     
@@ -69,5 +87,14 @@ public class ErrorResponse {
 
 		return dictionary
 	}
+    
+    public func createNSError() -> NSError {
+        let userInfo = [
+            NSLocalizedDescriptionKey: error,
+            NSLocalizedFailureReasonErrorKey: error,
+            NSLocalizedRecoverySuggestionErrorKey: "Try typing a better name"
+        ]
+        return NSError.init(domain: "OMDB Domain", code: -57, userInfo: userInfo)
+    }
 
 }

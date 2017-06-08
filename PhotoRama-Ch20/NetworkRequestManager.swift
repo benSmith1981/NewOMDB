@@ -21,7 +21,8 @@ class NetworkRequestManager {
                 deserialiseReceivedData(jsonData, onCompletion)
             } else if let requestError = error {
                 OperationQueue.main.addOperation {
-                    onCompletion(false, nil, nil, requestError as NSError)
+                    let errorResponseObject = ErrorResponse.init(nsError: requestError as NSError)
+                    onCompletion(false, nil, nil, errorResponseObject?.standardNSError)
                 }
             }
         }
@@ -35,7 +36,7 @@ class NetworkRequestManager {
             if let jsonDictionary = jsonObject as? NSDictionary {
                 let errorResponseObject = ErrorResponse.init(dictionary: jsonDictionary)!
                 if isThereAnErrorInOMDBResponse(errorResponseObject) {
-                    passBackErrorResponse(errorResponseObject, onCompletion)
+                    passBackOMDBErrorResponse(errorResponseObject, onCompletion)
                 }
                 else {
                     parseResultsFrom(from: jsonDictionary, onCompletion: onCompletion)
@@ -44,7 +45,8 @@ class NetworkRequestManager {
 
         } catch let error  {
             OperationQueue.main.addOperation {
-                onCompletion(false, nil, nil, error as NSError)
+                let errorResponseObject = ErrorResponse.init(nsError: error as NSError)
+                onCompletion(false, nil, nil, errorResponseObject?.standardNSError)
             }
 
         }
@@ -66,9 +68,9 @@ class NetworkRequestManager {
         }
     }
     
-    private static func passBackErrorResponse(_ errorResponse: ErrorResponse, _ onCompletion: @escaping APIMovieResponse){
+    private static func passBackOMDBErrorResponse(_ errorResponse: ErrorResponse, _ onCompletion: @escaping APIMovieResponse){
         OperationQueue.main.addOperation {
-            onCompletion(false, nil, nil, NSError.init(domain: "OMDB Domain", code: -1, userInfo: ["errorResponse" : errorResponse]))
+            onCompletion(false, nil, nil, errorResponse.createNSError())
         }
     }
     
