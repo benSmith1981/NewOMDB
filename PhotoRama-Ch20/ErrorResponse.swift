@@ -1,4 +1,4 @@
-/* 
+/*
 Copyright (c) 2017 Swift Models Generated from JSON powered by http://www.json4swift.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -53,7 +53,7 @@ public class ErrorResponse {
             response = (responsString == "False") ? false : true
         }
 		error = dictionary["Error"] as? String
-        standardNSError = self.createNSError()
+        standardNSError = self.createNSErrorFromOMDBErrorResponse()
 	}
     
     convenience public init?(nsError: NSError) {
@@ -62,13 +62,20 @@ public class ErrorResponse {
     }
 
     public func createNSError(error: NSError) -> NSError{
-        if error.isNetworkConnectionError() {
+        if error.isNetworkConnectionError() || error.isHttpError() {
             let userInfo = [
                 NSLocalizedDescriptionKey: "Network Issue",
                 NSLocalizedFailureReasonErrorKey: "Network Issue",
                 NSLocalizedRecoverySuggestionErrorKey: "Connect to network"
             ]
             return NSError.init(domain: "Network Connection", code: -57, userInfo: userInfo)
+        } else if error.isJSONParsingError(){
+            let userInfo = [
+                NSLocalizedDescriptionKey: "The JSON is faulty! Some backend developer needs to be fired",
+                NSLocalizedFailureReasonErrorKey: "The JSON is faulty!!",
+                NSLocalizedRecoverySuggestionErrorKey: "Fire the backend developer"
+            ]
+            return NSError.init(domain: "Bad JSON", code: -57, userInfo: userInfo)
         } else {
             return error
         }
@@ -88,7 +95,7 @@ public class ErrorResponse {
 		return dictionary
 	}
     
-    public func createNSError() -> NSError {
+    public func createNSErrorFromOMDBErrorResponse() -> NSError {
         let userInfo = [
             NSLocalizedDescriptionKey: error,
             NSLocalizedFailureReasonErrorKey: error,
