@@ -9,10 +9,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 import Foundation
- 
-/* For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
+import CoreData
 
 public class MovieDetail {
+    //The managed object for core data
+    var movieManagedObject: Movie!
+
 	public var title : String?
 	public var year : String?
 	public var rated : String?
@@ -29,7 +31,7 @@ public class MovieDetail {
 	public var poster : String?
 	public var ratings : Array<Ratings>?
 	public var metascore : String?
-	public var imdbRating : Double?
+    public var imdbRating : Double?
 	public var imdbVotes : String?
 	public var imdbID : String?
 	public var type : String?
@@ -66,8 +68,7 @@ public class MovieDetail {
 
     - returns: Json4Swift_Base Instance.
 */
-	required public init?(dictionary: NSDictionary) {
-
+    required public init?(dictionary: NSDictionary) {
 		title = dictionary["Title"] as? String
 		year = dictionary["Year"] as? String
 		rated = dictionary["Rated"] as? String
@@ -90,6 +91,16 @@ public class MovieDetail {
 		type = dictionary["Type"] as? String
 		totalSeasons = dictionary["totalSeasons"] as? Int
 		response = dictionary["Response"] as? Bool
+        
+        let context = CoredataManager.sharedInstance.persistentContainer.viewContext
+        context.performAndWait {
+            self.movieManagedObject = Movie(context: context)
+            self.movieManagedObject.imdbID = self.imdbID
+            self.movieManagedObject.plot = self.plot
+            self.movieManagedObject.poster = self.poster
+            self.movieManagedObject.title = self.title
+
+        }
 	}
 
 		

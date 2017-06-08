@@ -18,44 +18,81 @@ class NetworkRequestManager {
         let request = URLRequest(url: url)
         let task = session.dataTask(with: request) { (data, response, error) in
             if let jsonData = data {
-                parseReceivedData(jsonData, onCompletion)
+                deserialiseReceivedData(jsonData, onCompletion)
             } else if let requestError = error {
-                onCompletion(false, nil, nil, requestError as NSError)
+                OperationQueue.main.addOperation {
+                    let errorResponseObject = ErrorResponse.init(nsError: requestError as NSError)
+                    onCompletion(false, nil, nil, errorResponseObject?.standardNSError)
+                }
             }
         }
         task.resume()
     }
     
-    private static func parseReceivedData(_ jsonData: Data, _ onCompletion: @escaping APIMovieResponse) {
+    private static func deserialiseReceivedData(_ jsonData: Data, _ onCompletion: @escaping APIMovieResponse) {
         do {
             let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) as AnyObject?
             
-            if let arrayOfSearchResults = jsonObject?["Search"] as? NSArray {
-                iterateArrayOf(searchResults: arrayOfSearchResults, onCompletion)
+            if let jsonDictionary = jsonObject as? NSDictionary {
+                let errorResponseObject = ErrorResponse.init(dictionary: jsonDictionary)!
+                if isThereAnErrorInOMDBResponse(errorResponseObject) {
+                    passBackOMDBErrorResponse(errorResponseObject, onCompletion)
+                }
+                else {
+                    parseResultsFrom(from: jsonDictionary, onCompletion: onCompletion)
+                }
             }
-            
-            //have a plot then we know detail
-            if let moviePlot = jsonObject?["Plot"] as? String,
-                let movieDetailDict = jsonObject as? NSDictionary{
-                let movie = MovieDetail.init(dictionary: movieDetailDict)
-                onCompletion(true, movie, nil, nil)
-            }
+
         } catch let error  {
-            print(error)
-            onCompletion(false, nil, nil, error as NSError)
+            OperationQueue.main.addOperation {
+                let errorResponseObject = ErrorResponse.init(nsError: error as NSError)
+                onCompletion(false, nil, nil, errorResponseObject?.standardNSError)
+            }
 
         }
     }
-    private static func iterateArrayOf(searchResults: NSArray, _ onCompletion: @escaping APIMovieResponse) {
-        var temp: [Search] = []
-        for searchResult in searchResults{
+    
+    private static func isThereAnErrorInOMDBResponse(_ errorResponse: ErrorResponse) -> Bool {
+        return (errorResponse.response == false)
+    }
+    
+    private static func parseResultsFrom(from jsonDict: NSDictionary, onCompletion: @escaping APIMovieResponse) {
+        //have a plot then we know movie detail response
+        if let _ = jsonDict["Plot"] as? String,
+            let movieDetailDict = jsonDict as? NSDictionary{
+            createMovieDetails(from: movieDetailDict, onCompletion)
+        }
+        
+        if let arrayOfSearchResults = jsonDict["Search"] as? NSArray {
+            createSearchObjects(from: arrayOfSearchResults, onCompletion)
+        }
+    }
+    
+    private static func passBackOMDBErrorResponse(_ errorResponse: ErrorResponse, _ onCompletion: @escaping APIMovieResponse){
+        OperationQueue.main.addOperation {
+            onCompletion(false, nil, nil, errorResponse.createNSError())
+        }
+    }
+    
+    private static func createMovieDetails(from jsonDictionary: NSDictionary, _ onCompletion: @escaping APIMovieResponse){
+        let movie = MovieDetail.init(dictionary: jsonDictionary)
+        OperationQueue.main.addOperation {
+            onCompletion(true, movie, nil, nil)
+        }
+    }
+    
+    private static func createSearchObjects(from jsonArray: NSArray, _ onCompletion: @escaping APIMovieResponse) {
+        var searchObjectsArray: [Search] = []
+        for searchResult in jsonArray{
             if let searchResult = searchResult as? [String: AnyObject] {
                 //parse and store json response
                 let search = Search.init(dictionary: searchResult as NSDictionary)
-                temp.append(search!)
+                searchObjectsArray.append(search!)
             }
         }
-        onCompletion(true, nil, temp, nil)
+        OperationQueue.main.addOperation {
+            onCompletion(true, nil, searchObjectsArray, nil)
+        }
     }
     
 }
