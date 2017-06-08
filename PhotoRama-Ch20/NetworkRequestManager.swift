@@ -70,7 +70,7 @@ class NetworkRequestManager {
     
     private static func passBackOMDBErrorResponse(_ errorResponse: ErrorResponse, _ onCompletion: @escaping APIMovieResponse){
         OperationQueue.main.addOperation {
-            onCompletion(false, nil, nil, errorResponse.createNSErrorFromOMDBErrorResponse())
+            onCompletion(false, nil, nil, errorResponse.standardNSError)
         }
     }
     

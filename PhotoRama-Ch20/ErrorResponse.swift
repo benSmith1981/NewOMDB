@@ -53,7 +53,13 @@ public class ErrorResponse {
             response = (responsString == "False") ? false : true
         }
 		error = dictionary["Error"] as? String
-        standardNSError = self.createNSErrorFromOMDBErrorResponse()
+        
+        let userInfo = [
+            NSLocalizedDescriptionKey: self.error,
+            NSLocalizedFailureReasonErrorKey: self.error,
+            NSLocalizedRecoverySuggestionErrorKey: "Try typing a better name"
+        ]
+        standardNSError = NSError.init(domain: "OMDB Domain", code: -57, userInfo: userInfo)
 	}
     
     convenience public init?(nsError: NSError) {
@@ -94,14 +100,5 @@ public class ErrorResponse {
 
 		return dictionary
 	}
-    
-    public func createNSErrorFromOMDBErrorResponse() -> NSError {
-        let userInfo = [
-            NSLocalizedDescriptionKey: error,
-            NSLocalizedFailureReasonErrorKey: error,
-            NSLocalizedRecoverySuggestionErrorKey: "Try typing a better name"
-        ]
-        return NSError.init(domain: "OMDB Domain", code: -57, userInfo: userInfo)
-    }
 
 }
