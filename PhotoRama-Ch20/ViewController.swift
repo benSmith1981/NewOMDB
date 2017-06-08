@@ -13,7 +13,7 @@ protocol favMovieDelegate: class {
     func favMovie(movieSearchData: Search)
 }
 
-class ViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate, favMovieDelegate {
+class ViewController: UITableViewController, favMovieDelegate {
 
     var currentSearchText: String = "" //current page we are scrolling on
     var currentPage: Int = 1 //current page we are scrolling on
@@ -49,12 +49,27 @@ class ViewController: UITableViewController, UISearchResultsUpdating, UISearchBa
                                                selector: #selector(ViewController.movieDetailObserver),
                                                name:  NSNotification.Name(rawValue: "movieDetailNotification" ),
                                                object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(ViewController.notifyErrorResponse),
+                                               name:  NSNotification.Name(rawValue: "omdbError" ),
+                                               object: nil)
         // Do any additional setup after loading the view, typically from a nib.
     }
     
     func notifyObservers(notification: NSNotification) {
         var searchesDict: Dictionary<String,[Search]> = notification.userInfo as! Dictionary<String,[Search]>
         searchesArray = searchesDict["searchResults"]!
+    }
+    
+    func notifyErrorResponse(notification: NSNotification) {
+        var searchesDict: Dictionary<String,NSError> = notification.userInfo as! Dictionary<String,NSError>
+        let errorObject = searchesDict["error"]!
+        if let errorResponse = errorObject.userInfo["errorMessage"] as? ErrorResponse {
+            let alert = UIAlertController(title: "Error", message: errorResponse.error, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil ))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     func movieDetailObserver(notification: NSNotification) {
@@ -92,40 +107,6 @@ class ViewController: UITableViewController, UISearchResultsUpdating, UISearchBa
         if segue.identifier == "detailView" {
             let dest = segue.destination as! DetailViewController
             dest.movieDetailObject = currentDetailMovie
-        }
-    }
-
-    
-    @available(iOS 8.0, *)
-    public func updateSearchResults(for searchController: UISearchController) {
-        //Filter content for search
-        if searchController.isActive && (searchController.searchBar.text?.characters.count)! >= 2 && self.currentSearchText != searchController.searchBar.text {
-            self.currentSearchText = searchController.searchBar.text!
-            OMDBService.searchMovieByTitle(title: searchController.searchBar.text!)
-
-        }
-    }
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        self.currentPage = 1 //when we start typing reset the current page to 1 as new results will be loaded
-    }
-    
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        searchBar.returnKeyType = UIReturnKeyType.done // because of the update search results automatically being fired keyboard must say done not search
-        return true
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.tableView.reloadData()
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if searchController.isActive && (searchBar.text?.characters.count)! >= 2 && self.currentSearchText != searchBar.text {
-            let text = searchBar.text ?? ""
-            if text == searchBar.text {
-                self.currentSearchText = text
-                OMDBService.searchMovieByTitle(title: text)
-            }
         }
     }
     

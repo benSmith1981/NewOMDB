@@ -53,7 +53,7 @@ public class MovieDetail {
         var models:[MovieDetail] = []
         for item in array
         {
-            models.append(MovieDetail(dictionary: item as! NSDictionary, context: CoredataManager.sharedInstance.persistentContainer.viewContext))
+            models.append(MovieDetail(dictionary: item as! NSDictionary)!)
         }
         return models
     }
@@ -68,31 +68,31 @@ public class MovieDetail {
 
     - returns: Json4Swift_Base Instance.
 */
-    convenience init(dictionary: NSDictionary, context: NSManagedObjectContext) {
-        self.init()
+    required public init?(dictionary: NSDictionary) {
 		title = dictionary["Title"] as? String
-//		year = dictionary["Year"] as? String
-//		rated = dictionary["Rated"] as? String
-//		released = dictionary["Released"] as? String
-//		runtime = dictionary["Runtime"] as? String
-//		genre = dictionary["Genre"] as? String
-//		director = dictionary["Director"] as? String
-//		writer = dictionary["Writer"] as? String
-//		actors = dictionary["Actors"] as? String
+		year = dictionary["Year"] as? String
+		rated = dictionary["Rated"] as? String
+		released = dictionary["Released"] as? String
+		runtime = dictionary["Runtime"] as? String
+		genre = dictionary["Genre"] as? String
+		director = dictionary["Director"] as? String
+		writer = dictionary["Writer"] as? String
+		actors = dictionary["Actors"] as? String
 		plot = dictionary["Plot"] as? String
-//		language = dictionary["Language"] as? String
-//		country = dictionary["Country"] as? String
-//		awards = dictionary["Awards"] as? String
+		language = dictionary["Language"] as? String
+		country = dictionary["Country"] as? String
+		awards = dictionary["Awards"] as? String
 		poster = dictionary["Poster"] as? String
-//		if (dictionary["Ratings"] != nil) { ratings = Ratings.modelsFromDictionaryArray(array: dictionary["Ratings"] as! NSArray) }
-//		metascore = dictionary["Metascore"] as? String
-//		imdbRating = dictionary["imdbRating"] as? Double
-//		imdbVotes = dictionary["imdbVotes"] as? String
+		if (dictionary["Ratings"] != nil) { ratings = Ratings.modelsFromDictionaryArray(array: dictionary["Ratings"] as! NSArray) }
+		metascore = dictionary["Metascore"] as? String
+		imdbRating = dictionary["imdbRating"] as? Double
+		imdbVotes = dictionary["imdbVotes"] as? String
 		imdbID = dictionary["imdbID"] as? String
-//		type = dictionary["Type"] as? String
-//		totalSeasons = dictionary["totalSeasons"] as? Int
-//		response = dictionary["Response"] as? Bool
+		type = dictionary["Type"] as? String
+		totalSeasons = dictionary["totalSeasons"] as? Int
+		response = dictionary["Response"] as? Bool
         
+        let context = CoredataManager.sharedInstance.persistentContainer.viewContext
         context.performAndWait {
             self.movieManagedObject = Movie(context: context)
             self.movieManagedObject.imdbID = self.imdbID
@@ -114,26 +114,26 @@ public class MovieDetail {
 		let dictionary = NSMutableDictionary()
 
 		dictionary.setValue(self.title, forKey: "Title")
-//		dictionary.setValue(self.year, forKey: "Year")
-//		dictionary.setValue(self.rated, forKey: "Rated")
-//		dictionary.setValue(self.released, forKey: "Released")
-//		dictionary.setValue(self.runtime, forKey: "Runtime")
-//		dictionary.setValue(self.genre, forKey: "Genre")
-//		dictionary.setValue(self.director, forKey: "Director")
-//		dictionary.setValue(self.writer, forKey: "Writer")
-//		dictionary.setValue(self.actors, forKey: "Actors")
+		dictionary.setValue(self.year, forKey: "Year")
+		dictionary.setValue(self.rated, forKey: "Rated")
+		dictionary.setValue(self.released, forKey: "Released")
+		dictionary.setValue(self.runtime, forKey: "Runtime")
+		dictionary.setValue(self.genre, forKey: "Genre")
+		dictionary.setValue(self.director, forKey: "Director")
+		dictionary.setValue(self.writer, forKey: "Writer")
+		dictionary.setValue(self.actors, forKey: "Actors")
 		dictionary.setValue(self.plot, forKey: "Plot")
-//		dictionary.setValue(self.language, forKey: "Language")
-//		dictionary.setValue(self.country, forKey: "Country")
-//		dictionary.setValue(self.awards, forKey: "Awards")
+		dictionary.setValue(self.language, forKey: "Language")
+		dictionary.setValue(self.country, forKey: "Country")
+		dictionary.setValue(self.awards, forKey: "Awards")
 		dictionary.setValue(self.poster, forKey: "Poster")
-//		dictionary.setValue(self.metascore, forKey: "Metascore")
-//		dictionary.setValue(self.imdbRating, forKey: "imdbRating")
-//		dictionary.setValue(self.imdbVotes, forKey: "imdbVotes")
+		dictionary.setValue(self.metascore, forKey: "Metascore")
+		dictionary.setValue(self.imdbRating, forKey: "imdbRating")
+		dictionary.setValue(self.imdbVotes, forKey: "imdbVotes")
 		dictionary.setValue(self.imdbID, forKey: "imdbID")
-//		dictionary.setValue(self.type, forKey: "Type")
-//		dictionary.setValue(self.totalSeasons, forKey: "totalSeasons")
-//		dictionary.setValue(self.response, forKey: "Response")
+		dictionary.setValue(self.type, forKey: "Type")
+		dictionary.setValue(self.totalSeasons, forKey: "totalSeasons")
+		dictionary.setValue(self.response, forKey: "Response")
 
 		return dictionary
 	}

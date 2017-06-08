@@ -16,9 +16,11 @@ class CoreDataService {
     static func fetchFavouritedMovies(onCompletion: @escaping fetchMoviesResponse) {
         let fetchRequest: NSFetchRequest<Movie> = Movie.fetchRequest()
         
+        let sortByMovieTitle = NSSortDescriptor(key: #keyPath(Movie.title), ascending: true)
+        fetchRequest.sortDescriptors = [sortByMovieTitle]
         let viewContext = CoredataManager.sharedInstance.persistentContainer.viewContext
         
-        viewContext.perform {
+        viewContext.performAndWait {
             do {
                 let allMovies = try viewContext.fetch(fetchRequest)
                 onCompletion(allMovies, true, nil)

@@ -19,6 +19,12 @@ class OMDBService {
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "searchResults"),
                                                 object: self,
                                                 userInfo: searchResults)
+            } else {
+                print(error?.domain)
+                let errorResponseDict = ["error": error]
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "omdbError"),
+                                                object: self,
+                                                userInfo: errorResponseDict)
             }
         }
         
