@@ -8,7 +8,8 @@
 
 import Foundation
 
-typealias APIMovieResponse = (Bool, MovieDetail?, [Search]?, NSError?) -> Void
+typealias responseDictionary = [String : AnyObject]
+typealias APIMovieResponse = (responseDictionary?, NSError?) -> Void
 
 class NetworkRequestManager {
 
@@ -22,7 +23,8 @@ class NetworkRequestManager {
             } else if let requestError = error {
                 OperationQueue.main.addOperation {
                     let errorResponseObject = ErrorResponse.init(nsError: requestError as NSError)
-                    onCompletion(false, nil, nil, errorResponseObject?.standardNSError)
+                    onCompletion(nil, errorResponseObject?.standardNSError)
+                    throw errorResponseObject?.standardNSError
                 }
             }
         }
@@ -46,7 +48,7 @@ class NetworkRequestManager {
         } catch let error  {
             OperationQueue.main.addOperation {
                 let errorResponseObject = ErrorResponse.init(nsError: error as NSError)
-                onCompletion(false, nil, nil, errorResponseObject?.standardNSError)
+                onCompletion(nil, errorResponseObject?.standardNSError)
             }
 
         }
@@ -70,14 +72,15 @@ class NetworkRequestManager {
     
     private static func passBackOMDBErrorResponse(_ errorResponse: ErrorResponse, _ onCompletion: @escaping APIMovieResponse){
         OperationQueue.main.addOperation {
-            onCompletion(false, nil, nil, errorResponse.standardNSError)
+            onCompletion(nil, errorResponse.standardNSError)
         }
     }
     
     private static func createMovieDetails(from jsonDictionary: NSDictionary, _ onCompletion: @escaping APIMovieResponse){
-        let movie = MovieDetail.init(dictionary: jsonDictionary)
-        OperationQueue.main.addOperation {
-            onCompletion(true, movie, nil, nil)
+        if let movie = MovieDetail.init(dictionary: jsonDictionary) {
+            OperationQueue.main.addOperation {
+                onCompletion(["results" : movie], nil)
+            }
         }
     }
     
@@ -91,7 +94,7 @@ class NetworkRequestManager {
             }
         }
         OperationQueue.main.addOperation {
-            onCompletion(true, nil, searchObjectsArray, nil)
+            onCompletion(["results" : searchObjectsArray as AnyObject], nil)
         }
     }
     

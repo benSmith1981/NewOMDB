@@ -42,7 +42,7 @@ class ViewController: UITableViewController, favMovieDelegate {
         self.tableView.register(nib, forCellReuseIdentifier: "MovieCell")
         
         NotificationCenter.default.addObserver(self,
-                                                selector: #selector(ViewController.notifyObservers),
+                                                selector: #selector(ViewController.notifySearchResults),
                                                 name:  NSNotification.Name(rawValue: "searchResults" ),
                                                 object: nil)
         
@@ -58,9 +58,9 @@ class ViewController: UITableViewController, favMovieDelegate {
         // Do any additional setup after loading the view, typically from a nib.
     }
     
-    func notifyObservers(notification: NSNotification) {
+    func notifySearchResults(notification: NSNotification) {
         var searchesDict: Dictionary<String,[Search]> = notification.userInfo as! Dictionary<String,[Search]>
-        searchesArray = searchesDict["searchResults"]!
+        searchesArray = searchesDict["results"]!
     }
     
     func notifyErrorResponse(notification: NSNotification) {
@@ -78,7 +78,7 @@ class ViewController: UITableViewController, favMovieDelegate {
     
     func movieDetailObserver(notification: NSNotification) {
         var searchesDict = notification.userInfo as! Dictionary<String,MovieDetail>
-        currentDetailMovie = searchesDict["moviedetail"] as! MovieDetail
+        currentDetailMovie = searchesDict["results"] as! MovieDetail
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

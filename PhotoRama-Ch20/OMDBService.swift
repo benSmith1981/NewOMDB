@@ -12,31 +12,27 @@ class OMDBService {
     
     static func searchMovieByTitle(title: String) {
         let url = omdbURLCreator.createOMDBURLWithComponents(term: .bySearch(title), page: 1)
-
-        NetworkRequestManager.omdbRequest(with: url!) { (success, movieDetail, searchResultsArray, error) in
-            if success {
-                let searchResults = ["searchResults": searchResultsArray]
+        do {
+            try NetworkRequestManager.omdbRequest(with: url!) { (results, error) in
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "searchResults"),
                                                 object: self,
-                                                userInfo: searchResults)
-            } else {
-                print(error?.domain)
-                let errorResponseDict = ["error": error]
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "omdbError"),
-                                                object: self,
-                                                userInfo: errorResponseDict)
+                                                userInfo: results)
             }
+        } catch {
+            let errorResponseDict = ["error": error]
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "omdbError"),
+                                            object: self,
+                                            userInfo: errorResponseDict)
         }
+
         
     }
     
     static func getMovieDetailsByID(ID: String) {
         let url = omdbURLCreator.createOMDBURLWithComponents(term: .byImdbIDFull(ID))
         
-        NetworkRequestManager.omdbRequest(with: url!) { (success, movieDetail, searchResultsArray, error) in
-            if success {
-                let movieDetailsResult = ["moviedetail": movieDetail]
-                
+        do {
+            try NetworkRequestManager.omdbRequest(with: url!) { (results, error) in
                 do {
                     try CoredataManager.sharedInstance.persistentContainer.viewContext.save()
                 } catch let error {
@@ -44,9 +40,16 @@ class OMDBService {
                 }
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "movieDetailNotification"),
                                                 object: self,
-                                                userInfo: movieDetailsResult)
+                                                userInfo: results)
             }
+
+        } catch {
+            let errorResponseDict = ["error": error]
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "omdbError"),
+                                            object: self,
+                                            userInfo: errorResponseDict)
         }
+
         
     }
 }

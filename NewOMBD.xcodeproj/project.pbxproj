@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		1F31E72003272795D133A771 /* Pods_NewOMBD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A2E34E2CDB2D2599D88F6D0 /* Pods_NewOMBD.framework */; };
-		536AC49EBD0D7B587372F531 /* Pods_NewOMBDUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA65A790453965357AD42538 /* Pods_NewOMBDUITests.framework */; };
-		71F8E67E1C2EE37166CFA9DF /* Pods_NewOMBDTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F753DDDAE293F01A1E1F0B18 /* Pods_NewOMBDTests.framework */; };
 		900C0CB31EE80B38000E698D /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900C0CB11EE80B38000E698D /* MovieDetail.swift */; };
 		900C0CB41EE80B38000E698D /* Ratings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900C0CB21EE80B38000E698D /* Ratings.swift */; };
 		900C0CB61EE80FAC000E698D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900C0CB51EE80FAC000E698D /* DetailViewController.swift */; };
 		900C47EE1EE868A200ACE1B8 /* CoredataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900C47ED1EE868A200ACE1B8 /* CoredataManager.swift */; };
+		900F42331EE9D4BF0057945D /* NewOMBDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900F42321EE9D4BF0057945D /* NewOMBDTests.swift */; };
+		900F42411EE9D4C40057945D /* NewOMBDUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900F42401EE9D4C40057945D /* NewOMBDUITests.swift */; };
+		900F42491EE9D50D0057945D /* OMDBURLCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED8F1271EDE31ED00ABF40B /* OMDBURLCreator.swift */; };
 		903F3FEF1EE95E5700B67B6F /* ViewControllerSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903F3FEE1EE95E5700B67B6F /* ViewControllerSearch.swift */; };
 		903F3FF11EE9880E00B67B6F /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903F3FF01EE9880E00B67B6F /* ErrorResponse.swift */; };
 		9043650E1EE86D62009C4D79 /* Movie+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9043650C1EE86D62009C4D79 /* Movie+CoreDataClass.swift */; };
@@ -23,10 +24,6 @@
 		90B44E431EE9B7500036DC37 /* NSErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B44E421EE9B7500036DC37 /* NSErrorExtension.swift */; };
 		90B7D62A1EE7F1960089406E /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B7D6281EE7F1960089406E /* MovieCell.swift */; };
 		90B7D62B1EE7F1960089406E /* MovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90B7D6291EE7F1960089406E /* MovieCell.xib */; };
-		BED8F1111EDE30E900ABF40B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BED8F0FD1EDE30E900ABF40B /* Info.plist */; };
-		BED8F1131EDE30E900ABF40B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BED8F1001EDE30E900ABF40B /* Info.plist */; };
-		BED8F1161EDE310F00ABF40B /* PhotoRama_Ch20UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED8F0FE1EDE30E900ABF40B /* PhotoRama_Ch20UITests.swift */; };
-		BED8F1171EDE311300ABF40B /* PhotoRama_Ch20Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED8F1011EDE30E900ABF40B /* PhotoRama_Ch20Tests.swift */; };
 		BED8F12D1EDE31ED00ABF40B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED8F11D1EDE31ED00ABF40B /* AppDelegate.swift */; };
 		BED8F12E1EDE31EE00ABF40B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BED8F11E1EDE31ED00ABF40B /* Assets.xcassets */; };
 		BED8F12F1EDE31EE00ABF40B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BED8F11F1EDE31ED00ABF40B /* LaunchScreen.storyboard */; };
@@ -43,19 +40,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		BE7727A31EDDACE5005BFC69 /* PBXContainerItemProxy */ = {
+		900F42351EE9D4BF0057945D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BE7727831EDDACE5005BFC69 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = BE77278A1EDDACE5005BFC69;
-			remoteInfo = "PhotoRama-Ch20";
+			remoteInfo = NewOMBD;
 		};
-		BE7727AE1EDDACE5005BFC69 /* PBXContainerItemProxy */ = {
+		900F42431EE9D4C40057945D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BE7727831EDDACE5005BFC69 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = BE77278A1EDDACE5005BFC69;
-			remoteInfo = "PhotoRama-Ch20";
+			remoteInfo = NewOMBD;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -68,6 +65,12 @@
 		900C0CB21EE80B38000E698D /* Ratings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ratings.swift; sourceTree = "<group>"; };
 		900C0CB51EE80FAC000E698D /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		900C47ED1EE868A200ACE1B8 /* CoredataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoredataManager.swift; sourceTree = "<group>"; };
+		900F42301EE9D4BF0057945D /* NewOMBDTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewOMBDTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		900F42321EE9D4BF0057945D /* NewOMBDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOMBDTests.swift; sourceTree = "<group>"; };
+		900F42341EE9D4BF0057945D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		900F423E1EE9D4C40057945D /* NewOMBDUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewOMBDUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		900F42401EE9D4C40057945D /* NewOMBDUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOMBDUITests.swift; sourceTree = "<group>"; };
+		900F42421EE9D4C40057945D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		903F3FEE1EE95E5700B67B6F /* ViewControllerSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerSearch.swift; sourceTree = "<group>"; };
 		903F3FF01EE9880E00B67B6F /* ErrorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		9043650C1EE86D62009C4D79 /* Movie+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Movie+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -78,12 +81,6 @@
 		90B7D6281EE7F1960089406E /* MovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		90B7D6291EE7F1960089406E /* MovieCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieCell.xib; sourceTree = "<group>"; };
 		B27B193D37A911619128150A /* Pods-NewOMBD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewOMBD.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NewOMBD/Pods-NewOMBD.debug.xcconfig"; sourceTree = "<group>"; };
-		BED8F0FD1EDE30E900ABF40B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BED8F0FE1EDE30E900ABF40B /* PhotoRama_Ch20UITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoRama_Ch20UITests.swift; sourceTree = "<group>"; };
-		BED8F1001EDE30E900ABF40B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BED8F1011EDE30E900ABF40B /* PhotoRama_Ch20Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoRama_Ch20Tests.swift; sourceTree = "<group>"; };
-		BED8F1031EDE30E900ABF40B /* NewOMBDTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewOMBDTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BED8F1041EDE30E900ABF40B /* NewOMBDUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewOMBDUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BED8F11B1EDE31C500ABF40B /* NewOMBD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewOMBD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BED8F11D1EDE31ED00ABF40B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BED8F11E1EDE31ED00ABF40B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -105,6 +102,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		900F422D1EE9D4BF0057945D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		900F423B1EE9D4C40057945D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BE7727881EDDACE5005BFC69 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -113,25 +124,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BE77279F1EDDACE5005BFC69 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				71F8E67E1C2EE37166CFA9DF /* Pods_NewOMBDTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BE7727AA1EDDACE5005BFC69 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				536AC49EBD0D7B587372F531 /* Pods_NewOMBDUITests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		900F42311EE9D4BF0057945D /* NewOMBDTests */ = {
+			isa = PBXGroup;
+			children = (
+				900F42321EE9D4BF0057945D /* NewOMBDTests.swift */,
+				900F42341EE9D4BF0057945D /* Info.plist */,
+			);
+			path = NewOMBDTests;
+			sourceTree = "<group>";
+		};
+		900F423F1EE9D4C40057945D /* NewOMBDUITests */ = {
+			isa = PBXGroup;
+			children = (
+				900F42401EE9D4C40057945D /* NewOMBDUITests.swift */,
+				900F42421EE9D4C40057945D /* Info.plist */,
+			);
+			path = NewOMBDUITests;
+			sourceTree = "<group>";
+		};
 		904365101EE86E5D009C4D79 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,32 +160,14 @@
 			isa = PBXGroup;
 			children = (
 				BED8F11C1EDE31ED00ABF40B /* NewOMBD */,
-				BED8F0FC1EDE30E900ABF40B /* NewOMBDUITests */,
-				BED8F0FF1EDE30E900ABF40B /* NewOMBD20Tests */,
-				BED8F1031EDE30E900ABF40B /* NewOMBDTests.xctest */,
-				BED8F1041EDE30E900ABF40B /* NewOMBDUITests.xctest */,
 				BED8F11B1EDE31C500ABF40B /* NewOMBD.app */,
 				DCC13CE98F8F92F3730F0E8F /* Pods */,
+				900F42311EE9D4BF0057945D /* NewOMBDTests */,
+				900F423F1EE9D4C40057945D /* NewOMBDUITests */,
 				CC052660B5173A3A37CE30A1 /* Frameworks */,
+				900F42301EE9D4BF0057945D /* NewOMBDTests.xctest */,
+				900F423E1EE9D4C40057945D /* NewOMBDUITests.xctest */,
 			);
-			sourceTree = "<group>";
-		};
-		BED8F0FC1EDE30E900ABF40B /* NewOMBDUITests */ = {
-			isa = PBXGroup;
-			children = (
-				BED8F0FD1EDE30E900ABF40B /* Info.plist */,
-				BED8F0FE1EDE30E900ABF40B /* PhotoRama_Ch20UITests.swift */,
-			);
-			path = NewOMBDUITests;
-			sourceTree = "<group>";
-		};
-		BED8F0FF1EDE30E900ABF40B /* NewOMBD20Tests */ = {
-			isa = PBXGroup;
-			children = (
-				BED8F1001EDE30E900ABF40B /* Info.plist */,
-				BED8F1011EDE30E900ABF40B /* PhotoRama_Ch20Tests.swift */,
-			);
-			path = NewOMBD20Tests;
 			sourceTree = "<group>";
 		};
 		BED8F11C1EDE31ED00ABF40B /* NewOMBD */ = {
@@ -240,6 +235,42 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		900F422F1EE9D4BF0057945D /* NewOMBDTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 900F42371EE9D4BF0057945D /* Build configuration list for PBXNativeTarget "NewOMBDTests" */;
+			buildPhases = (
+				900F422C1EE9D4BF0057945D /* Sources */,
+				900F422D1EE9D4BF0057945D /* Frameworks */,
+				900F422E1EE9D4BF0057945D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				900F42361EE9D4BF0057945D /* PBXTargetDependency */,
+			);
+			name = NewOMBDTests;
+			productName = NewOMBDTests;
+			productReference = 900F42301EE9D4BF0057945D /* NewOMBDTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		900F423D1EE9D4C40057945D /* NewOMBDUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 900F42451EE9D4C40057945D /* Build configuration list for PBXNativeTarget "NewOMBDUITests" */;
+			buildPhases = (
+				900F423A1EE9D4C40057945D /* Sources */,
+				900F423B1EE9D4C40057945D /* Frameworks */,
+				900F423C1EE9D4C40057945D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				900F42441EE9D4C40057945D /* PBXTargetDependency */,
+			);
+			name = NewOMBDUITests;
+			productName = NewOMBDUITests;
+			productReference = 900F423E1EE9D4C40057945D /* NewOMBDUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		BE77278A1EDDACE5005BFC69 /* NewOMBD */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BE7727B61EDDACE5005BFC69 /* Build configuration list for PBXNativeTarget "NewOMBD" */;
@@ -260,48 +291,6 @@
 			productReference = BED8F11B1EDE31C500ABF40B /* NewOMBD.app */;
 			productType = "com.apple.product-type.application";
 		};
-		BE7727A11EDDACE5005BFC69 /* NewOMBDTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BE7727B91EDDACE5005BFC69 /* Build configuration list for PBXNativeTarget "NewOMBDTests" */;
-			buildPhases = (
-				1846C504DCE1627576AC9B88 /* [CP] Check Pods Manifest.lock */,
-				BE77279E1EDDACE5005BFC69 /* Sources */,
-				BE77279F1EDDACE5005BFC69 /* Frameworks */,
-				BE7727A01EDDACE5005BFC69 /* Resources */,
-				0209A189BAEA6018B103A325 /* [CP] Embed Pods Frameworks */,
-				92524B4E0561E2E66BC88476 /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				BE7727A41EDDACE5005BFC69 /* PBXTargetDependency */,
-			);
-			name = NewOMBDTests;
-			productName = "PhotoRama-Ch20Tests";
-			productReference = BED8F1031EDE30E900ABF40B /* NewOMBDTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		BE7727AC1EDDACE5005BFC69 /* NewOMBDUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BE7727BC1EDDACE5005BFC69 /* Build configuration list for PBXNativeTarget "NewOMBDUITests" */;
-			buildPhases = (
-				575FB86B07FF629CC271D204 /* [CP] Check Pods Manifest.lock */,
-				BE7727A91EDDACE5005BFC69 /* Sources */,
-				BE7727AA1EDDACE5005BFC69 /* Frameworks */,
-				BE7727AB1EDDACE5005BFC69 /* Resources */,
-				81044B6CADDA2048820972C4 /* [CP] Embed Pods Frameworks */,
-				DA6705303825E91928622202 /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				BE7727AF1EDDACE5005BFC69 /* PBXTargetDependency */,
-			);
-			name = NewOMBDUITests;
-			productName = "PhotoRama-Ch20UITests";
-			productReference = BED8F1041EDE30E900ABF40B /* NewOMBDUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -312,22 +301,20 @@
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Ben Smith";
 				TargetAttributes = {
+					900F422F1EE9D4BF0057945D = {
+						CreatedOnToolsVersion = 8.3.3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = BE77278A1EDDACE5005BFC69;
+					};
+					900F423D1EE9D4C40057945D = {
+						CreatedOnToolsVersion = 8.3.3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = BE77278A1EDDACE5005BFC69;
+					};
 					BE77278A1EDDACE5005BFC69 = {
 						CreatedOnToolsVersion = 8.3;
 						DevelopmentTeam = CWK29L7ZPT;
 						ProvisioningStyle = Automatic;
-					};
-					BE7727A11EDDACE5005BFC69 = {
-						CreatedOnToolsVersion = 8.3;
-						DevelopmentTeam = CWK29L7ZPT;
-						ProvisioningStyle = Automatic;
-						TestTargetID = BE77278A1EDDACE5005BFC69;
-					};
-					BE7727AC1EDDACE5005BFC69 = {
-						CreatedOnToolsVersion = 8.3;
-						DevelopmentTeam = CWK29L7ZPT;
-						ProvisioningStyle = Automatic;
-						TestTargetID = BE77278A1EDDACE5005BFC69;
 					};
 				};
 			};
@@ -345,75 +332,43 @@
 			projectRoot = "";
 			targets = (
 				BE77278A1EDDACE5005BFC69 /* NewOMBD */,
-				BE7727A11EDDACE5005BFC69 /* NewOMBDTests */,
-				BE7727AC1EDDACE5005BFC69 /* NewOMBDUITests */,
+				900F422F1EE9D4BF0057945D /* NewOMBDTests */,
+				900F423D1EE9D4C40057945D /* NewOMBDUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		900F422E1EE9D4BF0057945D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		900F423C1EE9D4C40057945D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BE7727891EDDACE5005BFC69 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BED8F1111EDE30E900ABF40B /* Info.plist in Resources */,
 				BED8F1301EDE31EE00ABF40B /* Main.storyboard in Resources */,
 				BED8F1311EDE31EE00ABF40B /* Info.plist in Resources */,
 				BED8F12F1EDE31EE00ABF40B /* LaunchScreen.storyboard in Resources */,
 				BED8F12E1EDE31EE00ABF40B /* Assets.xcassets in Resources */,
-				BED8F1131EDE30E900ABF40B /* Info.plist in Resources */,
 				90B7D62B1EE7F1960089406E /* MovieCell.xib in Resources */,
 				BED8F1381EDE31EE00ABF40B /* SecretKeys.plist in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BE7727A01EDDACE5005BFC69 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BE7727AB1EDDACE5005BFC69 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0209A189BAEA6018B103A325 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NewOMBDTests/Pods-NewOMBDTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1846C504DCE1627576AC9B88 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 		4F6D27F6A546E223B63DEFB7 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -427,21 +382,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NewOMBD/Pods-NewOMBD-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		575FB86B07FF629CC271D204 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		65ED4432B1FE6C31F46BC92E /* [CP] Check Pods Manifest.lock */ = {
@@ -459,36 +399,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		81044B6CADDA2048820972C4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NewOMBDUITests/Pods-NewOMBDUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		92524B4E0561E2E66BC88476 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NewOMBDTests/Pods-NewOMBDTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		AF6C98C559811837DA47C0EF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -504,24 +414,26 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NewOMBD/Pods-NewOMBD-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DA6705303825E91928622202 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NewOMBDUITests/Pods-NewOMBDUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		900F422C1EE9D4BF0057945D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				900F42331EE9D4BF0057945D /* NewOMBDTests.swift in Sources */,
+				900F42491EE9D50D0057945D /* OMDBURLCreator.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		900F423A1EE9D4C40057945D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				900F42411EE9D4C40057945D /* NewOMBDUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BE7727871EDDACE5005BFC69 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -549,34 +461,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BE77279E1EDDACE5005BFC69 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BED8F1171EDE311300ABF40B /* PhotoRama_Ch20Tests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BE7727A91EDDACE5005BFC69 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BED8F1161EDE310F00ABF40B /* PhotoRama_Ch20UITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		BE7727A41EDDACE5005BFC69 /* PBXTargetDependency */ = {
+		900F42361EE9D4BF0057945D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BE77278A1EDDACE5005BFC69 /* NewOMBD */;
-			targetProxy = BE7727A31EDDACE5005BFC69 /* PBXContainerItemProxy */;
+			targetProxy = 900F42351EE9D4BF0057945D /* PBXContainerItemProxy */;
 		};
-		BE7727AF1EDDACE5005BFC69 /* PBXTargetDependency */ = {
+		900F42441EE9D4C40057945D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BE77278A1EDDACE5005BFC69 /* NewOMBD */;
-			targetProxy = BE7727AE1EDDACE5005BFC69 /* PBXContainerItemProxy */;
+			targetProxy = 900F42431EE9D4C40057945D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -600,6 +496,56 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		900F42381EE9D4BF0057945D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = NewOMBDTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.NewOMBDTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NewOMBD.app/NewOMBD";
+			};
+			name = Debug;
+		};
+		900F42391EE9D4BF0057945D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = NewOMBDTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.NewOMBDTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NewOMBD.app/NewOMBD";
+			};
+			name = Release;
+		};
+		900F42461EE9D4C40057945D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = NewOMBDUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.NewOMBDUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = NewOMBD;
+			};
+			name = Debug;
+		};
+		900F42471EE9D4C40057945D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = NewOMBDUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.NewOMBDUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = NewOMBD;
+			};
+			name = Release;
+		};
 		BE7727B41EDDACE5005BFC69 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -723,71 +669,25 @@
 			};
 			name = Release;
 		};
-		BE7727BA1EDDACE5005BFC69 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CFA01181BE08073C185BB935 /* Pods-NewOMBDTests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = CWK29L7ZPT;
-				INFOPLIST_FILE = "PhotoRama-Ch20Tests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "test.PhotoRama-Ch20Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NewOMBD.app/NewOMBD";
-			};
-			name = Debug;
-		};
-		BE7727BB1EDDACE5005BFC69 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7642B74FDBD5514DD0D9191F /* Pods-NewOMBDTests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = CWK29L7ZPT;
-				INFOPLIST_FILE = "PhotoRama-Ch20Tests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "test.PhotoRama-Ch20Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NewOMBD.app/NewOMBD";
-			};
-			name = Release;
-		};
-		BE7727BD1EDDACE5005BFC69 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6883B039388787999F5A4995 /* Pods-NewOMBDUITests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = CWK29L7ZPT;
-				INFOPLIST_FILE = "PhotoRama-Ch20UITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "test.PhotoRama-Ch20UITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = "PhotoRama-Ch20";
-			};
-			name = Debug;
-		};
-		BE7727BE1EDDACE5005BFC69 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CB80C20A26112561E164CED4 /* Pods-NewOMBDUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = CWK29L7ZPT;
-				INFOPLIST_FILE = "PhotoRama-Ch20UITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "test.PhotoRama-Ch20UITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = "PhotoRama-Ch20";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		900F42371EE9D4BF0057945D /* Build configuration list for PBXNativeTarget "NewOMBDTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				900F42381EE9D4BF0057945D /* Debug */,
+				900F42391EE9D4BF0057945D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		900F42451EE9D4C40057945D /* Build configuration list for PBXNativeTarget "NewOMBDUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				900F42461EE9D4C40057945D /* Debug */,
+				900F42471EE9D4C40057945D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		BE7727861EDDACE5005BFC69 /* Build configuration list for PBXProject "NewOMBD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -802,24 +702,6 @@
 			buildConfigurations = (
 				BE7727B71EDDACE5005BFC69 /* Debug */,
 				BE7727B81EDDACE5005BFC69 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		BE7727B91EDDACE5005BFC69 /* Build configuration list for PBXNativeTarget "NewOMBDTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BE7727BA1EDDACE5005BFC69 /* Debug */,
-				BE7727BB1EDDACE5005BFC69 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		BE7727BC1EDDACE5005BFC69 /* Build configuration list for PBXNativeTarget "NewOMBDUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BE7727BD1EDDACE5005BFC69 /* Debug */,
-				BE7727BE1EDDACE5005BFC69 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
