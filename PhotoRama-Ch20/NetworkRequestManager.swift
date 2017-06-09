@@ -24,7 +24,6 @@ class NetworkRequestManager {
                 OperationQueue.main.addOperation {
                     let errorResponseObject = ErrorResponse.init(nsError: requestError as NSError)
                     onCompletion(nil, errorResponseObject?.standardNSError)
-                    throw errorResponseObject?.standardNSError
                 }
             }
         }
