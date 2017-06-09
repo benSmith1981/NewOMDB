@@ -9,11 +9,14 @@
 import Foundation
 
 typealias responseDictionary = [String : AnyObject]
-typealias APIMovieResponse = (_ inner: (responseDictionary?, NSError?) throws -> Void) -> ()
-
+typealias APIMovieResponse = (_ inner:(responseDictionary?) throws -> responseDictionary) -> Void
+//                              (_ inner: () throws -> NSDictionary) -> Void
 class NetworkRequestManager {
+    
+    func login3(params:[String: String], completion: (_ inner: () throws -> Void) -> ()) {
+    }
 
-    static func omdbRequest(with url: URL, onCompletion: @escaping APIMovieResponse) {
+    static func omdbRequest(with url: URL, onCompletion: @escaping APIMovieResponse) throws {
         let config = URLSessionConfiguration.default
         let session: URLSession = URLSession(configuration: config)
         let request = URLRequest(url: url)
@@ -22,14 +25,11 @@ class NetworkRequestManager {
             if let jsonData = data {
                 deserialiseReceivedData(jsonData, onCompletion)
             } else if let requestError = error {
-                OperationQueue.main.addOperation {
-                    let errorResponseObject = ErrorResponse.init(nsError: requestError as NSError)
-                    
-                    onCompletion({responseDict,error in
-                        throw error!
-                    })
-//                    onCompletion(nil, errorResponseObject?.standardNSError)
-                }
+                let errorResponseObject = ErrorResponse.init(nsError: requestError as NSError)
+                
+                onCompletion({response in
+                    throw (errorResponseObject?.standardNSError!)!
+                })
             }
         }
         task.resume()
@@ -50,14 +50,11 @@ class NetworkRequestManager {
             }
 
         } catch let error  {
-            OperationQueue.main.addOperation {
-                if let errorResponseObject = ErrorResponse.init(nsError: error as NSError) {
-                    onCompletion({responseDict,error in
-                        throw errorResponseObject.standardNSError!
-                    })
-                }
+            if let errorResponseObject = ErrorResponse.init(nsError: error as NSError) {
+                onCompletion({responseDict in
+                    throw errorResponseObject.standardNSError!
+                })
             }
-
         }
     }
     
@@ -78,16 +75,16 @@ class NetworkRequestManager {
     }
     
     private static func passBackOMDBErrorResponse(_ errorResponse: ErrorResponse, _ onCompletion: @escaping APIMovieResponse){
-        OperationQueue.main.addOperation {
-            onCompletion({inner,response in
-                throw errorResponse.standardNSError!
-            })
-        }
+        onCompletion({responseDict in
+            throw errorResponse.standardNSError!
+        })
     }
     
     private static func createMovieDetails(from jsonDictionary: NSDictionary, _ onCompletion: @escaping APIMovieResponse){
         if let movie = MovieDetail.init(dictionary: jsonDictionary) {
-        
+            onCompletion({responseDict in
+                return ["results" : movie]
+            })
         }
     }
     
@@ -100,9 +97,22 @@ class NetworkRequestManager {
                 searchObjectsArray.append(search!)
             }
         }
-        OperationQueue.main.addOperation {
-            onCompletion(["results" : searchObjectsArray as AnyObject], nil)
-        }
+        onCompletion({responseDict in
+            return ["results" : searchObjectsArray as AnyObject]
+        })
+        
     }
-    
+    //https://appventure.me/2015/06/19/swift-try-catch-asynchronous-closures/
+//    func asynchronousWork(completion: @escaping (_ inner: () throws -> NSDictionary) -> Void) -> Void {
+//        let config = URLSessionConfiguration.default
+//        let session: URLSession = URLSession(configuration: config)
+//        let request = URLRequest(url: NSURL.init(string: "") as! URL)
+//        
+//        let task = session.dataTask(with: request) { (data, response, error) in
+//            
+//            completion({return [:]})
+//            
+//            completion({throw error!})
+//        }
+//    }
 }

@@ -14,13 +14,15 @@ class OMDBService {
         let url = omdbURLCreator.createOMDBURLWithComponents(term: .bySearch(title), page: 1)
         do {
 
-            try NetworkRequestManager.omdbRequest(with: url!) { inner(results, error) in
+            try NetworkRequestManager.omdbRequest(with: url!, onCompletion: { (_: (responseDictionary?) throws -> responseDictionary) in
                 OperationQueue.main.addOperation {
                     NotificationCenter.default.post(name: Notification.Name(rawValue: "searchResults"),
                                                     object: self,
-                                                    userInfo: results)
+                                                    userInfo: [:])
                 }
-            }
+            })
+
+
         } catch {
             let errorResponseDict = ["error": error]
             OperationQueue.main.addOperation {
@@ -37,7 +39,7 @@ class OMDBService {
         let url = omdbURLCreator.createOMDBURLWithComponents(term: .byImdbIDFull(ID))
         
         do {
-            try NetworkRequestManager.omdbRequest(with: url!) { (results, error) in
+            try NetworkRequestManager.omdbRequest(with: url!, onCompletion: { (_: (responseDictionary?) throws -> responseDictionary) in
                 do {
                     try CoredataManager.sharedInstance.persistentContainer.viewContext.save()
                 } catch let error {
@@ -45,16 +47,13 @@ class OMDBService {
                 }
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "movieDetailNotification"),
                                                 object: self,
-                                                userInfo: results)
-            }
-
+                                                userInfo: [:])
+            })
         } catch {
             let errorResponseDict = ["error": error]
             NotificationCenter.default.post(name: Notification.Name(rawValue: "omdbError"),
                                             object: self,
                                             userInfo: errorResponseDict)
         }
-
-        
     }
 }
