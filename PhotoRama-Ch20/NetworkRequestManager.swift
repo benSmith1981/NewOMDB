@@ -9,7 +9,7 @@
 import Foundation
 
 typealias responseDictionary = [String : AnyObject]
-typealias APIMovieResponse = (responseDictionary?, NSError?) -> Void
+typealias APIMovieResponse = (_ inner: (responseDictionary?, NSError?) throws -> Void) -> ()
 
 class NetworkRequestManager {
 
@@ -17,13 +17,18 @@ class NetworkRequestManager {
         let config = URLSessionConfiguration.default
         let session: URLSession = URLSession(configuration: config)
         let request = URLRequest(url: url)
+        
         let task = session.dataTask(with: request) { (data, response, error) in
             if let jsonData = data {
                 deserialiseReceivedData(jsonData, onCompletion)
             } else if let requestError = error {
                 OperationQueue.main.addOperation {
                     let errorResponseObject = ErrorResponse.init(nsError: requestError as NSError)
-                    onCompletion(nil, errorResponseObject?.standardNSError)
+                    
+                    onCompletion({responseDict,error in
+                        throw error!
+                    })
+//                    onCompletion(nil, errorResponseObject?.standardNSError)
                 }
             }
         }
@@ -46,8 +51,11 @@ class NetworkRequestManager {
 
         } catch let error  {
             OperationQueue.main.addOperation {
-                let errorResponseObject = ErrorResponse.init(nsError: error as NSError)
-                onCompletion(nil, errorResponseObject?.standardNSError)
+                if let errorResponseObject = ErrorResponse.init(nsError: error as NSError) {
+                    onCompletion({responseDict,error in
+                        throw errorResponseObject.standardNSError!
+                    })
+                }
             }
 
         }
@@ -71,15 +79,15 @@ class NetworkRequestManager {
     
     private static func passBackOMDBErrorResponse(_ errorResponse: ErrorResponse, _ onCompletion: @escaping APIMovieResponse){
         OperationQueue.main.addOperation {
-            onCompletion(nil, errorResponse.standardNSError)
+            onCompletion({inner,response in
+                throw errorResponse.standardNSError!
+            })
         }
     }
     
     private static func createMovieDetails(from jsonDictionary: NSDictionary, _ onCompletion: @escaping APIMovieResponse){
         if let movie = MovieDetail.init(dictionary: jsonDictionary) {
-            OperationQueue.main.addOperation {
-                onCompletion(["results" : movie], nil)
-            }
+        
         }
     }
     

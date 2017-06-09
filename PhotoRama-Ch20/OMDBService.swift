@@ -13,16 +13,21 @@ class OMDBService {
     static func searchMovieByTitle(title: String) {
         let url = omdbURLCreator.createOMDBURLWithComponents(term: .bySearch(title), page: 1)
         do {
-            try NetworkRequestManager.omdbRequest(with: url!) { (results, error) in
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "searchResults"),
-                                                object: self,
-                                                userInfo: results)
+
+            try NetworkRequestManager.omdbRequest(with: url!) { inner(results, error) in
+                OperationQueue.main.addOperation {
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "searchResults"),
+                                                    object: self,
+                                                    userInfo: results)
+                }
             }
         } catch {
             let errorResponseDict = ["error": error]
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "omdbError"),
-                                            object: self,
-                                            userInfo: errorResponseDict)
+            OperationQueue.main.addOperation {
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "omdbError"),
+                                                object: self,
+                                                userInfo: errorResponseDict)
+            }
         }
 
         
