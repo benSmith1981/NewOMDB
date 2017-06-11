@@ -75,7 +75,7 @@ class NetworkRequestManager {
     }
     
     private static func passBackOMDBErrorResponse(_ errorResponse: ErrorResponse, _ onCompletion: @escaping APIMovieResponse){
-        onCompletion({responseDict in
+        onCompletion({_ in
             throw errorResponse.standardNSError!
         })
     }

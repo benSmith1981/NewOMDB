@@ -18,7 +18,7 @@ class OMDBService {
                 OperationQueue.main.addOperation {
                     NotificationCenter.default.post(name: Notification.Name(rawValue: "searchResults"),
                                                     object: self,
-                                                    userInfo: [:])
+                                                    userInfo: responseDictionary as! Dictionary)
                 }
             })
 
