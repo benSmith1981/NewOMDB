@@ -8,41 +8,77 @@
 
 import Foundation
 
+enum errorEnum: Error {
+    case omdbRequest(details: String)
+}
+
 typealias responseDictionary = [String : AnyObject]
-typealias APIMovieResponse = (_ inner:(responseDictionary?) throws -> responseDictionary) -> Void
-//                              (_ inner: () throws -> NSDictionary) -> Void
+typealias APIMovieResponse = (_ inner:() throws -> responseDictionary) -> Void
 class NetworkRequestManager {
     
-    func login3(params:[String: String], completion: (_ inner: () throws -> Void) -> ()) {
-    }
 
-    static func omdbRequest(with url: URL, onCompletion: @escaping APIMovieResponse) throws {
+    static func omdbRequest(with url: URL, onCompletion: @escaping APIMovieResponse) -> Void {
         let config = URLSessionConfiguration.default
         let session: URLSession = URLSession(configuration: config)
         let request = URLRequest(url: url)
         
-        let task = session.dataTask(with: request) { (data, response, error) in
+        let task = session.dataTask(with: request) { (data, response, error) -> Void in
             if let jsonData = data {
-                deserialiseReceivedData(jsonData, onCompletion)
-            } else if let requestError = error {
-                let errorResponseObject = ErrorResponse.init(nsError: requestError as NSError)
-                
-                onCompletion({response in
-                    throw (errorResponseObject?.standardNSError!)!
-                })
+                do {
+                    let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) as AnyObject?
+                    if let jsonDictionary = jsonObject as? NSDictionary {
+                        let errorResponseObject = ErrorResponse.init(dictionary: jsonDictionary)!
+                        if isThereAnErrorInOMDBResponse(errorResponseObject) {
+                            onCompletion({
+//                                throw errorResponseObject.standardNSError!
+                                throw errorEnum.omdbRequest(details: errorResponseObject.error!)
+                            })
+                        }
+                        else {
+                            //have a plot then we know movie detail response
+                            if let _ = jsonDictionary["Plot"] as? String {
+                                if let movie = MovieDetail.init(dictionary: jsonDictionary) {
+                                    onCompletion({return ["results" : movie]})
+                                }
+                            } else if let arrayOfSearchResults = jsonDictionary["Search"] as? NSArray {
+                                var searchObjectsArray: [Search] = []
+                                for searchResult in arrayOfSearchResults{
+                                    if let searchResult = searchResult as? [String: AnyObject] {
+                                        //parse and store json response
+                                        let search = Search.init(dictionary: searchResult as NSDictionary)
+                                        searchObjectsArray.append(search!)
+                                    }
+                                }
+                                onCompletion({return ["results" : searchObjectsArray as AnyObject]})
+                                
+                            }
+                            onCompletion({throw error!})
+                        }
+                    }
+                }
+                catch {
+                    onCompletion({throw error})
+                }
+//                } catch {
+//                    throw error
+//                    onCompletion({_ in
+//                        throw error
+//                    })
+//                }
+
             }
         }
         task.resume()
     }
     
-    private static func deserialiseReceivedData(_ jsonData: Data, _ onCompletion: @escaping APIMovieResponse) {
+    private static func deserialiseReceivedData(_ jsonData: Data, _ onCompletion: @escaping APIMovieResponse) throws {
         do {
             let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) as AnyObject?
             
             if let jsonDictionary = jsonObject as? NSDictionary {
                 let errorResponseObject = ErrorResponse.init(dictionary: jsonDictionary)!
                 if isThereAnErrorInOMDBResponse(errorResponseObject) {
-                    passBackOMDBErrorResponse(errorResponseObject, onCompletion)
+                    try passBackOMDBErrorResponse(errorResponseObject, onCompletion)
                 }
                 else {
                     parseResultsFrom(from: jsonDictionary, onCompletion: onCompletion)
@@ -74,7 +110,7 @@ class NetworkRequestManager {
         }
     }
     
-    private static func passBackOMDBErrorResponse(_ errorResponse: ErrorResponse, _ onCompletion: @escaping APIMovieResponse){
+    private static func passBackOMDBErrorResponse(_ errorResponse: ErrorResponse, _ onCompletion: @escaping APIMovieResponse) throws{
         onCompletion({_ in
             throw errorResponse.standardNSError!
         })
@@ -102,6 +138,10 @@ class NetworkRequestManager {
         })
         
     }
+    
+    //    func login3(params:[String: String], completion: (_ inner: () throws -> Void) -> ()) {
+    //    }
+
     //https://appventure.me/2015/06/19/swift-try-catch-asynchronous-closures/
 //    func asynchronousWork(completion: @escaping (_ inner: () throws -> NSDictionary) -> Void) -> Void {
 //        let config = URLSessionConfiguration.default
