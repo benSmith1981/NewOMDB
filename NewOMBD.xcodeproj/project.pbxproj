@@ -660,10 +660,12 @@
 			baseConfigurationReference = B27B193D37A911619128150A /* Pods-NewOMBD.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = CWK29L7ZPT;
 				INFOPLIST_FILE = "PhotoRama-Ch20/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "test.PhotoRama-Ch20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bensmith.OMDB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -674,10 +676,12 @@
 			baseConfigurationReference = 87D139B5805C9EF5E602C5B3 /* Pods-NewOMBD.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = CWK29L7ZPT;
 				INFOPLIST_FILE = "PhotoRama-Ch20/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "test.PhotoRama-Ch20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bensmith.OMDB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
