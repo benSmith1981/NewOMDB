@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         CoredataManager.sharedInstance.saveContext()
     }
 
-    // MARK: - Core Data stack
+
 
 }
 

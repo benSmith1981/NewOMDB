@@ -1,37 +1,23 @@
 //
-//  FavTableViewController.swift
+//  RatingsTableViewController.swift
 //  NewOMBD
 //
-//  Created by Ben Smith on 07/06/2017.
+//  Created by ben smith on 13/06/17.
 //  Copyright © 2017 Ben Smith. All rights reserved.
 //
 
 import UIKit
 
-class FavTableViewController: UITableViewController {
+class RatingsTableViewController: UITableViewController {
 
-    var selectedMovie: Movie?
-    var movies = [Movie]() {
-        didSet {
-            self.tableView.reloadData()
-        }
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
-        self.clearsSelectionOnViewWillAppear = false
+        // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        CoreDataService.fetchFavouritedMovies { (movies, success, error) in
-            self.movies = movies!
-            print(movies)
-        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,33 +29,23 @@ class FavTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return (movies.count)
+        return 0
     }
 
-    
+    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
         // Configure the cell...
-        let movie = movies[indexPath.row]
-        cell.textLabel?.text = movie.title
+
         return cell
     }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedMovie = movies[indexPath.row]
-        performSegue(withIdentifier: "detailFavView", sender: self)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let dest =  segue.destination as! DetailTableViewController
-        dest.movieDetailObject = MovieDetail.init(movie: selectedMovie!)
-    }
+    */
 
     /*
     // Override to support conditional editing of the table view.

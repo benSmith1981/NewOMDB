@@ -10,10 +10,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 import Foundation
 import CoreData
-
 public class MovieDetail {
-    //The managed object for core data
-    var movieManagedObject: Movie!
 
 	public var title : String?
 	public var year : String?
@@ -92,17 +89,11 @@ public class MovieDetail {
 		totalSeasons = dictionary["totalSeasons"] as? Int
 		response = dictionary["Response"] as? Bool
         
-        let context = CoredataManager.sharedInstance.persistentContainer.viewContext
-        context.performAndWait {
-            self.movieManagedObject = Movie(context: context)
-            self.movieManagedObject.imdbID = self.imdbID
-            self.movieManagedObject.plot = self.plot
-            self.movieManagedObject.poster = self.poster
-            self.movieManagedObject.title = self.title
 
-        }
 	}
-
+    convenience public init?(movie: Movie){
+        self.init(dictionary: ["imdbID" : movie.imdbID , "plot" : movie.plot])
+    }
 		
 /**
     Returns the dictionary representation for the current instance.

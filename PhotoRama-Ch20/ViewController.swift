@@ -78,7 +78,7 @@ class ViewController: UITableViewController, favMovieDelegate {
     
     func movieDetailObserver(notification: NSNotification) {
         var searchesDict = notification.userInfo as! Dictionary<String,MovieDetail>
-        currentDetailMovie = searchesDict["results"] as! MovieDetail
+        currentDetailMovie = searchesDict["results"]!
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -109,7 +109,7 @@ class ViewController: UITableViewController, favMovieDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detailView" {
-            let dest = segue.destination as! DetailViewController
+            let dest = segue.destination as! DetailTableViewController
             dest.movieDetailObject = currentDetailMovie
         }
     }

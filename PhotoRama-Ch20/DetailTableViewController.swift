@@ -1,37 +1,29 @@
 //
-//  FavTableViewController.swift
+//  DetailTableViewController.swift
 //  NewOMBD
 //
-//  Created by Ben Smith on 07/06/2017.
+//  Created by ben smith on 13/06/17.
 //  Copyright © 2017 Ben Smith. All rights reserved.
 //
 
 import UIKit
 
-class FavTableViewController: UITableViewController {
+protocol saveToCoreData: class {
+    func saveDetailInfo()
+}
 
-    var selectedMovie: Movie?
-    var movies = [Movie]() {
-        didSet {
-            self.tableView.reloadData()
-        }
-    }
+class DetailTableViewController: UITableViewController, saveToCoreData {
+
+    var movieDetailObject: MovieDetail?
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let nib = UINib(nibName: "DetailTableViewCell", bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: "DetailTableViewCellID")
         // Uncomment the following line to preserve selection between presentations
-        self.clearsSelectionOnViewWillAppear = false
+        // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        CoreDataService.fetchFavouritedMovies { (movies, success, error) in
-            self.movies = movies!
-            print(movies)
-        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,27 +40,19 @@ class FavTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return (movies.count)
+        return 2
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-        let movie = movies[indexPath.row]
-        cell.textLabel?.text = movie.title
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DetailTableViewCellID", for: indexPath) as! DetailTableViewCell
+        cell.setup(detailData: movieDetailObject!)
+        cell.delegate = self
         return cell
+
     }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedMovie = movies[indexPath.row]
-        performSegue(withIdentifier: "detailFavView", sender: self)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let dest =  segue.destination as! DetailTableViewController
-        dest.movieDetailObject = MovieDetail.init(movie: selectedMovie!)
+    func saveDetailInfo() {
+        CoreDataService.saveDetailedMovie(details: movieDetailObject!)
     }
 
     /*
