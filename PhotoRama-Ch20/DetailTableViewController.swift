@@ -51,6 +51,7 @@ class DetailTableViewController: UITableViewController, saveToCoreData {
         return cell
 
     }
+    
     func saveDetailInfo() {
         CoreDataService.saveDetailedMovie(details: movieDetailObject!)
     }

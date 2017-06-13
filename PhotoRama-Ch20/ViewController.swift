@@ -79,6 +79,8 @@ class ViewController: UITableViewController, favMovieDelegate {
     func movieDetailObserver(notification: NSNotification) {
         var searchesDict = notification.userInfo as! Dictionary<String,MovieDetail>
         currentDetailMovie = searchesDict["results"]!
+        self.performSegue(withIdentifier: "detailView", sender: self)
+
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -103,7 +105,6 @@ class ViewController: UITableViewController, favMovieDelegate {
         currentMovie = searchesArray[indexPath.row]
         if let id = currentMovie?.imdbID {
             OMDBService.getMovieDetailsByID(ID: id)
-            self.performSegue(withIdentifier: "detailView", sender: self)
         }
     }
     

@@ -67,8 +67,10 @@ class FavTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let dest =  segue.destination as! DetailTableViewController
-        dest.movieDetailObject = MovieDetail.init(movie: selectedMovie!)
+        if segue.identifier == "detailFavView" {
+            let dest =  segue.destination as! DetailTableViewController
+            dest.movieDetailObject = MovieDetail.init(movie: selectedMovie!)
+        }
     }
 
     /*
