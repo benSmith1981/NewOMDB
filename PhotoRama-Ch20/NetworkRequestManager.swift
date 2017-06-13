@@ -52,7 +52,6 @@ class NetworkRequestManager {
                                 onCompletion({return ["results" : searchObjectsArray as AnyObject]})
                                 
                             }
-                            onCompletion({throw error!})
                         }
                     }
                 }
