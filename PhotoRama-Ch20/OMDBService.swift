@@ -52,14 +52,20 @@ class OMDBService {
                     } catch let error {
                         print(error.localizedDescription)
                     }
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "movieDetailNotification"),
-                                                    object: self,
-                                                    userInfo: dict)
+                    OperationQueue.main.addOperation {
+
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "movieDetailNotification"),
+                                                        object: self,
+                                                        userInfo: dict)
+                    }
                 } catch {
-                    let errorResponseDict = ["error": error]
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "omdbError"),
-                                                    object: self,
-                                                    userInfo: errorResponseDict)
+                    OperationQueue.main.addOperation {
+
+                        let errorResponseDict = ["error": error]
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "omdbError"),
+                                                        object: self,
+                                                        userInfo: errorResponseDict)
+                    }
                 }
             })
 

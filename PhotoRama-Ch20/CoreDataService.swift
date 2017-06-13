@@ -60,6 +60,19 @@ class CoreDataService {
             movieManagedObject.plot = details.plot
             movieManagedObject.poster = details.poster
             movieManagedObject.title = details.title
+            
+            let ratingsManagedObject = RatingsMO(context: context)
+
+
+            for rating in details.ratings! {
+                let entityRatings = NSEntityDescription.entity(forEntityName: "RatingsMO", in: context)
+                let newRating = NSManagedObject(entity: entityRatings!, insertInto: context)
+                newRating.setValue(rating.source, forKey: "source")
+                newRating.setValue(rating.value, forKey: "value")
+                newRating.setValue(NSSet(object: newRating), forKey: "addresses")
+
+            }
+            
             CoredataManager.sharedInstance.saveContext()
         }
     }
