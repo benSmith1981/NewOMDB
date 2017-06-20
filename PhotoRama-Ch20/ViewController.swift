@@ -31,6 +31,17 @@ class ViewController: UITableViewController, favMovieDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        CoreDataService.fetchAllRatings { (result) in
+            switch result {
+            case .failure(let error):
+                    break
+            case .success(let ratings):
+                    break
+            case .noResults:
+                    break
+            }
+        }
+        
         searchController.accessibilityLabel = "search"
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
@@ -78,7 +89,9 @@ class ViewController: UITableViewController, favMovieDelegate {
     
     func movieDetailObserver(notification: NSNotification) {
         var searchesDict = notification.userInfo as! Dictionary<String,MovieDetail>
-        currentDetailMovie = searchesDict["results"] as! MovieDetail
+        currentDetailMovie = searchesDict["results"]!
+        self.performSegue(withIdentifier: "detailView", sender: self)
+
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -103,13 +116,12 @@ class ViewController: UITableViewController, favMovieDelegate {
         currentMovie = searchesArray[indexPath.row]
         if let id = currentMovie?.imdbID {
             OMDBService.getMovieDetailsByID(ID: id)
-            self.performSegue(withIdentifier: "detailView", sender: self)
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detailView" {
-            let dest = segue.destination as! DetailViewController
+            let dest = segue.destination as! DetailTableViewController
             dest.movieDetailObject = currentDetailMovie
         }
     }

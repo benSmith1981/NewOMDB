@@ -11,6 +11,7 @@ import CoreData
 
 class CoredataManager {
     
+    // MARK: - Core Data stack
     static let sharedInstance = CoredataManager()
     private init() { }
     
