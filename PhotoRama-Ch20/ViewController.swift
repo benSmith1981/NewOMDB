@@ -31,6 +31,17 @@ class ViewController: UITableViewController, favMovieDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        CoreDataService.fetchAllRatings { (result) in
+            switch result {
+            case .failure(let error):
+                    break
+            case .success(let ratings):
+                    break
+            case .noResults:
+                    break
+            }
+        }
+        
         searchController.accessibilityLabel = "search"
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false

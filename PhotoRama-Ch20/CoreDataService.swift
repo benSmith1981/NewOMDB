@@ -14,6 +14,7 @@ typealias fetchRatingsResponse = ([RatingsMO]?, Bool, NSError?) -> Void
 
 enum ratingsResult {
     case success([RatingsMO])
+    case noResults
     case failure(Error)
 }
 
@@ -45,7 +46,11 @@ class CoreDataService {
         viewContext.performAndWait {
             do {
                 let allRatings = try viewContext.fetch(fetchRequest)
-                onCompletion(.success(allRatings))
+                if allRatings.isEmpty {
+                    onCompletion(.noResults)
+                } else {
+                    onCompletion(.success(allRatings))
+                }
             } catch let error{
                 onCompletion(.failure(error))
             }
@@ -61,7 +66,6 @@ class CoreDataService {
             movieManagedObject.poster = details.poster
             movieManagedObject.title = details.title
             
-            let ratingsManagedObject = RatingsMO(context: context)
 
 
             for rating in details.ratings! {
@@ -69,7 +73,7 @@ class CoreDataService {
                 let newRating = NSManagedObject(entity: entityRatings!, insertInto: context)
                 newRating.setValue(rating.source, forKey: "source")
                 newRating.setValue(rating.value, forKey: "value")
-                newRating.setValue(NSSet(object: newRating), forKey: "addresses")
+                newRating.setValue(NSSet(object: newRating), forKey: "movie")
 
             }
             
